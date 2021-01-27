@@ -1,0 +1,233 @@
+% ---------------------------- Problem 1----------------------------------
+\subsubsection*{\center Задача № 1.}
+{\bf Условие.~}
+Разложить в ряд Фурье заданную функцию $f(x)$, построить графики $f(x)$ и суммы ее ряда Фурье. Если не указывается, какой вид разложения в ряд необходимо представить, то требуется разложить функцию либо в общий тригонометрический ряд Фурье, либо следует выбрать оптимальный вид разложения в зависимости от данной функции.
+
+
+\[ 
+f(x)=\frac{x-\pi}{2} \text{ на отрезке } [0; \pi] \text{ по синусам кратных дуг.}
+\]
+{\bf Решение.~}	
+%График
+\begin{center}
+	\begin{tikzpicture}
+	\begin{axis}[xmin=-1,	xmax=4, 	ymin=-0.5,	ymax=0,
+	width=0.5\textwidth,
+	height=0.4\textwidth,
+	axis x line=middle,
+	axis y line=middle, 
+	every axis x label/.style={at={(current axis.right of origin)},anchor=west},
+	every inner x axis line/.append style={|-latex'},
+	every inner y axis line/.append style={|-latex'},
+	minor tick num=1,			
+	axis equal=true,
+	xlabel=$x$, 
+	ylabel=$y$,          
+	samples=100,
+	clip=true,
+	]
+	\addplot[color=black, line width=1.5pt,domain=0:3.14] {(x-3.14)/2};
+	\end{axis}
+	\end{tikzpicture}
+\end{center}
+\noindent
+Построим тригонометрический ряд Фурье для нечётных функций вида
+$$
+f(x)=\sum_{n=1}^\infty 
+	\left(b_n\sin{(n\omega x)}\right),\quad\text{где}\,\omega=\frac{2\pi}{T},\,T=2\pi.
+$$
+\noindent
+Вычислим коэффициенты
+$$
+\begin{array}{rcl}
+b_n &=& \displaystyle\frac{2}{\pi}
+	\int\limits_0^\pi
+	\frac{x-\pi}{2} sin(nx)dx ={}									\\[12pt]
+	&=& \displaystyle\frac{1}{\pi n}\left(-\left.x\cos(nx)+\int cos(nx)dx\right) \right|_0^\pi
+	+\left.\frac{1}{n}\cos(xn) \right|_0^\pi = 	\\[12pt]
+	&=& \displaystyle\frac{-\pi cos(\pi n) + \frac{sin(\pi n)}{n} + 0 cos(0) - \frac{sin(0)}{n}}{2\pi n}+\frac{cos(\pi n) - cos(0)}{n} = \frac{(-1)^n - 1}{n} - \frac{(-1)^n}{n},	\\[12pt]
+\end{array}
+$$
+Применив теорему Дирихле о поточечной сходимости ряда Фурье, видим, что построенный ряд Фурье сходится 
+к периодическому (с периодом $T=2\pi$) продолжению исходной функции при всех $x\ne 2\pi n$, и 
+$S(2\pi n)= 0$ при $n=0,\pm1,\pm2,\ldots$, где $S(x)$ --- сумма ряда Фурье. 
+График функции $S(x)$ имеет следующий вид
+\begin{center}
+	\begin{tikzpicture}
+	\begin{axis}[xmin=-9, xmax=9, ymin=-1, ymax=1.5,
+	width=0.8\textwidth,
+	height=0.4\textwidth,
+	axis x line=middle,
+	axis y line=middle, 
+	every axis x label/.style={at={(current axis.right of origin)},anchor=west},
+	every inner x axis line/.append style={|-latex'},
+	every inner y axis line/.append style={|-latex'},
+	minor tick num=1,			
+	axis equal=true,
+	xlabel=$x$, 
+	ylabel=$S(x)$,          
+	samples=100,
+	clip=true,
+	]
+	\addplot[color=black, line width=1.5pt,domain=-9:-6.28] {(x+9.42)/2};	
+	\addplot[color=black, line width=1.5pt,domain=-6.28:0] {(x+3.14)/2};
+	\addplot[color=black, line width=1.5pt,domain=0:6.28]{(x-3.14)/2};
+	\addplot[color=black, line width=1.5pt,domain=6.28:9]{(x-9.42)/2};
+	\addplot[thick,dashed] coordinates {(-6.28,-1.57) (-6.28,1.57)};
+	\addplot[thick,dashed] coordinates {(0,-1.57) (0,1.57)};
+	\addplot[thick,dashed] coordinates {(6.28,-1.57) (6.28,1.57)};
+	\addplot[
+	mark=*,
+	mark options={fill=black, draw=black},
+	only marks,
+	] coordinates {(-6.28, 0)  (0, 0) (6.28, 0)};
+	\end{axis}
+	\end{tikzpicture}
+\end{center}
+\noindent
+\textbf{Ответ:}
+\[
+f(x)=\sum_{n=1}^\infty\left( \frac{(-1)^n-1}{n}-\frac{(-1)^n}{n} \right )\sin(nx), x\ne 2\pi n;
+ \text{ }S(2\pi n)=0, \text{ при } n\in\mathbb{Z}.
+\]
+
+
+
+
+% ---------------------------- Problem 2----------------------------------
+\subsubsection*{\center Задача № 2.}
+{\bf Условие.~}
+Для заданной графически функции $y(x)$ построить ряд Фурье в комплексной форме, изобразить график суммы построенного ряда
+
+%График
+\begin{center}
+	\begin{tikzpicture}
+	\begin{axis}[xmin=-1,	xmax=4.5, 	ymin=-0.5,	ymax=0.5,
+	width=0.5\textwidth,
+	height=0.4\textwidth,
+	axis x line=middle,
+	axis y line=middle, 
+	every axis x label/.style={at={(current axis.right of origin)},anchor=west},
+	every inner x axis line/.append style={|-latex'},
+	every inner y axis line/.append style={|-latex'},
+	minor tick num=1,			
+	axis equal=true,
+	xlabel=$x$, 
+	ylabel=$y$,          
+	samples=100,
+	clip=true,
+	]
+	\addplot[color=black, line width=1.5pt,domain=0:2] {x/2-1};
+	\addplot[color=black, line width=1.5pt,domain=2:4]{1};
+	\addplot[thick,dashed] coordinates {(2,0) (2,1)};
+	\addplot[thick,dashed] coordinates {(4,0) (4,1)};
+	\end{axis}
+	\end{tikzpicture}
+\end{center}
+
+\noindent
+\textbf{Решение.}\\
+
+\noindent
+Ряд Фурье в комплексной форме имеет следующий вид
+\[
+f(x) = \sum_{n=-\infty}^\infty c_n e^{i\omega nx},\quad c_n=\frac{1}{T}\int\limits_a^b f(x) e^{-i\omega nx}dx,\,\omega=\frac{2\pi}{T}.
+\]
+В нашем примере $ a=0,b=4,T=4,\omega=\pi/2$, 
+найдем коэффицинеты $c_n,\,n=0,\pm1,\pm2,\ldots$
+где $\omega=2\pi/T,\,T=4.$
+$$
+\begin{array}{rcl}
+c_0 &=&\displaystyle\frac{1}{4} \int\limits_0^4 f(x)dx=\frac{1}{4}\left( \int\limits_0^2 (\frac{x}{2}-1)dx + \int\limits_2^4 dx \right)=\frac{1}{4},\\[12pt]
+c_n &=&\displaystyle\frac{1}{4}\left(
+\int\limits_0^2
+(\frac{x}{2}-1)e^{-i\omega nx}dx + \int\limits_2^4
+e^{-i\omega nx}dx \right) ={}\\[12pt]
+&=&\displaystyle\frac{1}{4}\left(
+-\left.\frac{2ie^{-i\omega nx}}{\pi n}\right|_0^2
++\left.\frac{e^{-i\omega nx}}{\pi n}\left(\frac{2}{\pi n} + {ix}\right)\right|_0^2 + \left.\frac{2ie^{-i\omega nx}}{\pi n}\right|_2^4\right) = \\[12pt]
+&=&\displaystyle\frac{i(-e^{-i\pi n}+1+e^{-2i\pi n})}{2\pi n}-\frac{1-e^{-i\pi n}}{2\pi^2 n^2}=\frac{(-1)^n-2}{2 i\pi n}+\frac{(-1)^n-1}{2\pi^2 n^2}.
+\end{array}
+$$
+\noindent
+Применив теорему Дирихле о поточечной сходимости ряда Фурье, видим, что построенный ряд Фурье сходится 
+к периодическому (с периодом $T=4$) продолжению исходной функции при всех $x\ne 4n-2$ и при $x\ne 4n$, $S(4n-2)=1/2$ и $S(4n)=0$ при 
+$n=0,\pm1,\pm2,\ldots$, где $S(x)$ --- сумма ряда Фурье. График функции $S(x)$ имеет вид
+\begin{center}
+	\begin{tikzpicture}
+	\begin{axis}[xmin=-8, xmax=8, ymin=-1, ymax=0.5,
+	width=0.8\textwidth,
+	height=0.4\textwidth,
+	axis x line=middle,
+	axis y line=middle, 
+	every axis x label/.style={at={(current axis.right of origin)},anchor=west},
+	every inner x axis line/.append style={|-latex'},
+	every inner y axis line/.append style={|-latex'},
+	minor tick num=1,			
+	axis equal=true,
+	xlabel=$x$, 
+	ylabel=$S(x)$,          
+	samples=100,
+	clip=true,
+	]
+	\addplot[color=black, line width=1.5pt,domain=-8:-6] {x/2+3};
+	\addplot[color=black, line width=1.5pt,domain=-6:-4]{1};
+	\addplot[color=black, line width=1.5pt,domain=-4:-2] {x/2+1};
+	\addplot[color=black, line width=1.5pt,domain=-2:0]{1};
+	\addplot[color=black, line width=1.5pt,domain=0:2]{x/2-1};
+	\addplot[color=black, line width=1.5pt,domain=2:4] {1};
+	\addplot[color=black, line width=1.5pt,domain=4:6]{x/2-3};
+    \addplot[color=black, line width=1.5pt,domain=6:8] {1};
+	\addplot[thick,dashed] coordinates {(-6,0) (-6,1)};
+	\addplot[thick,dashed] coordinates {(-4,-1) (-4,1)};
+	\addplot[thick,dashed] coordinates {(-2,0) (-2,1)};
+	\addplot[thick,dashed] coordinates {(0,-1) (-0,1)};
+	\addplot[thick,dashed] coordinates {(2,0) (2,1)};
+	\addplot[thick,dashed] coordinates {(4,-1) (4,1)};
+	\addplot[thick,dashed] coordinates {(6,0) (6,1)};
+	\addplot[
+	mark=*,
+	mark options={fill=black, draw=black},
+	only marks,
+	] coordinates {(-6, 0.5) (-4, 0) (-2, 0.5) (0, 0) (2, 0.5) (4, 0) (6, 0.5)};
+	\end{axis}
+	\end{tikzpicture}
+\end{center}
+
+\noindent
+\textbf{Ответ:}
+\[
+\begin{split}
+&f(x)=\sum_{n=-\infty}^\infty\left[ \frac{(-1)^n-2}{2 i\pi n}+\frac{(-1)^n-1}{2\pi^2 n^2}\right] e^{\tfrac{i\pi nx}{2}},~ x\ne 4n, 4n-2; \\
+&S(4n)=0,\quad S(4n-2)=1/2\quad\text{при}~n\in\mathbb{Z}.
+\end{split}
+\]
+
+
+% ---------------------------- Problem 3----------------------------------
+\subsubsection*{\center Задача № 3.}
+{\bf Условие.~}\\
+Найти резольвенту для интегрального уравнения Вольтерры со следующим ядром 
+$$K(x,t)=\frac{t^2+t+1}{x^2+x+1}.$$
+
+\noindent
+{\bf Решение.~}\\
+\noindent
+Запишем интегральное уравнение Вольтерры 2-го рода:
+$$
+y(x)=f(x) + \lambda\int\limits_a^x K(x,t)y(t)dt.
+$$
+Из рекурентных соотношений получаем
+$$
+\begin{array}{rcl}
+K_1(x,t)&=&\displaystyle \frac{t^2+t+1}{x^2+x+1}, \\[12pt]
+K_2(x,t)&=&\displaystyle\int\limits_t^x K(x,s)K_1(s,t)ds = \int\limits_t^x\frac{s^2+s+1}{x^2+x+1}\cdot \frac{t^2+t+1}{s^2+s+1}ds = (x-t)\frac{t^2+t+1}{x^2+x+1},\\[12pt]
+K_3(x,t)&=&\displaystyle\int\limits_t^x K(x,s)K_2(s,t)ds = \int\limits_t^x\frac{s^2+s+1}{x^2+x+1}\cdot (s-t)\frac{t^2+t+1}{s^2+s+1} ds =\frac{(x-t)^2}{2}\frac{t^2+t+1}{x^2+x+1}.\\[12pt]
+K_j(x,t)&=&\displaystyle\frac{t^2+t+1}{x^2+x+1}\cdot\frac{(x-t)^{j-1}}{(j-1)!},\quad j\in\mathbb{N}.
+\end{array}
+$$
+Подставляя это выражение для итерированных ядер, найдем резольвенту
+$$ 
+R(x,t,\lambda)=\frac{t^2+t+1}{x^2+x+1}\sum_{j=1}^\infty\lambda^{j-1}\cdot\frac{(x-t)^{j-1}}{(j-1)!},
+\quad j=1,2,\ldots
+$$
